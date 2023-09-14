@@ -18,11 +18,9 @@ def lagrange(x, y, k):
 
 
 def is_prime(value):
-    divider = 2
-    while divider <= math.ceil((math.sqrt(value))):
+    for divider in range(2, math.isqrt(value) + 1):
         if value % divider == 0:
             return False
-        divider += 1
     return True
 
 
@@ -38,17 +36,15 @@ def main():
     n_player = validate_input("Insert the value of 'n': ", 0, 1)
     threshold = validate_input("Insert the value of the threshold (k): ", 0, 1, False, n_player)
     secret = int(input("Insert the value of the secret (M): "))
-    p = validate_input("Insert the value of p: ", 0, max(n_player + 1, secret), True)
+    p = validate_input("Insert the value of p: ", 0, max(n_player + 1, secret + 1), True)
     players = {"Player" + str(i): None for i in range(1, n_player + 1)}
     coefficients = [random.randint(0, p) for i in range(threshold - 1)] + [secret]
     f = np.poly1d(coefficients)
     x_coord = [i for i in range(1, n_player + 1)]
     y_coord = []
     
-    
     for x in x_coord:
         y_coord.append(f(x) % p)
-
 
     for player, (x, y) in zip(players.keys(), zip(x_coord, y_coord)):
         players[player] = (x, y)
