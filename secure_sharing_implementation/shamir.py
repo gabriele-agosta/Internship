@@ -29,12 +29,8 @@ def is_prime(value):
 def validate_input(text, value, min_val, check_prime = False, max_val=None):
     while value < min_val or (max_val is not None and value > max_val):
         value = int(input(text))
-    if check_prime:
-        while True:
-            r = is_prime(value)
-            if not r:
-                validate_input("The value must be prime: ", 0, min_val, check_prime)
-            break
+    if check_prime and not is_prime(value):
+        validate_input("The value must be prime: ", 0, min_val, check_prime)
     return value
 
 
