@@ -38,7 +38,7 @@ def main():
     secret = int(input("Insert the value of the secret (M): "))
     p = validate_input("Insert the value of p: ", 0, max(n_player + 1, secret + 1), True)
     players = {"Player" + str(i): None for i in range(1, n_player + 1)}
-    coefficients = [random.randint(0, p) for i in range(threshold - 1)] + [secret]
+    coefficients = [random.randint(0, p - 1) for i in range(threshold - 1)] + [secret]
     f = np.poly1d(coefficients)
     x_coord = [i for i in range(1, n_player + 1)]
     y_coord = []
