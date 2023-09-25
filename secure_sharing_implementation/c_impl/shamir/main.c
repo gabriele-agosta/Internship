@@ -5,6 +5,7 @@
 #include <limits.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 
 typedef struct {
     int coefficient;
@@ -16,43 +17,64 @@ typedef struct {
 } Polynomial;
 typedef struct {
     char name[32];
-    long x;
-    long y;
+    int* x;
+    int* y;
 } Player;
 
 int validate_input(char* text, int min_val, int max_val);
-int read_input();
+int get_secret_type();
+char* read_input();
 int choose_modulus(int n, int secret);
 int mod(int a, int b);
 int* generate_coefficients(int threshold, int p, int secret);
-long get_secret();
+void get_secret(int secret_type, int** secret, int* secret_length);
 bool is_prime(int value);
 void print_polynomial(Polynomial polynomial);
-void print_players(Player* players, int n);
-void split_shares(Player* players, Polynomial f, int n, int p);
-void rebuild_secret(Player* players, int k, int p);
+void print_players(Player* players, int n, int j);
+void split_shares(Player* players, Polynomial f, int n, int p, int l);
+int rebuild_secret(Player* players, int k, int p, int l);
 Player* slice_array(Player* players, int start, int end);
-Player* populate_players(int n);
+Player* populate_players(int n, int length);
 Polynomial initialize_polynomial(int* coefficients, int threshold);
 
 
 int main(){
-    int n_player = validate_input("Insert the value of 'n': ", 0, INT_MAX);
-    int threshold = validate_input("Insert the value of the threshold (k): ", 1, n_player);
-    int secret = get_secret();
-    int p = choose_modulus(n_player, secret);
-    Player* players = populate_players(n_player);
-    int* coefficients = generate_coefficients(threshold, p, secret);
-    Polynomial f = initialize_polynomial(coefficients, threshold);
+    int n_player = 0, threshold = 0, secret_type = 0, secret_length = 0;
+    int* secret = NULL;
+    int* p = NULL;
+    Player* players = NULL;
 
-    printf("P = %d\n", p);
-    print_polynomial(f);
+    n_player = validate_input("Insert the value of 'n': ", 0, INT_MAX);
+    threshold = validate_input("Insert the value of the threshold (k): ", 1, n_player);
+    secret_type = get_secret_type();
+    get_secret(secret_type, &secret, &secret_length);
+    players = populate_players(n_player, secret_length);
 
-    split_shares(players, f, n_player, p);
+    // The secret is split among players
+    for (int i = 0; i < secret_length; i++) {
+        p = (int*)realloc(p, sizeof(int) * i + 1);
+        p[i] = choose_modulus(n_player, secret[i]);
+        int* coefficients = generate_coefficients(threshold, p[i], secret[i]);
+        Polynomial f = initialize_polynomial(coefficients, threshold);
 
-    print_players(players, n_player);
+        printf("P = %d\n", p[i]);
+        print_polynomial(f);
 
-    for (int i = 0; i < n_player; i++) rebuild_secret(slice_array(players, 0, i), i, p);
+        split_shares(players, f, n_player, p[i], i);
+        print_players(players, n_player, i);
+    }
+
+    // The secret is getting decrypted, each time with a different number of players
+    for (int i = 0; i < n_player; i++){
+        char* rebuilt_secret = NULL;
+        Player* sliced_array = slice_array(players, 0, i);
+        for (int j = 0; j < secret_length; j++){
+            char s = rebuild_secret(sliced_array, i, p[j], j);
+            rebuilt_secret = (char*)realloc(rebuilt_secret, (i+1)*sizeof(char));
+            strncat(rebuilt_secret, &s, 1);
+        }
+        printf("Result with %d players: %s\n",  i + 1, rebuilt_secret);
+    }
     return 1;
 }
 
@@ -66,30 +88,61 @@ int validate_input(char* text, int min_val, int max_val){
     return value;
 }
 
-int read_input(){
+char* read_input(){
     char *string = NULL;
     size_t size = 0;
 
     fflush(stdin);
     getline(&string, &size, stdin);
 
-    return atoi(string);
+    return string;
 }
 
-long get_secret(){
-    FILE* fp = NULL;
-    long secret = 0;
+int get_secret_type(){
+    int secret_type = 0;
 
-    printf("Insert the secret (M) you want to share: ");
-    secret = read_input();
-    if ((fp = fopen("./secret.txt", "w+")) != NULL) {
-        fprintf(fp, "%ld", secret);
-        fclose(fp);
+    do {
+        printf("Choose what kind of secret you want to share: \n1.Number/String; \n2.File \n");
+        scanf("%d", &secret_type);
+    } while (secret_type > 2 || secret_type < 1);
+    return secret_type;
+}
+
+void get_secret(int secret_type, int** secret, int* secret_length){
+    char* input = NULL;
+
+    if (secret_type == 2) {
+        FILE* fp = NULL;
+        int length = 0;
+
+        if ((fp = fopen("./secret.txt", "r")) != NULL) {
+            char ch;
+            while ((ch = fgetc(fp)) != EOF) {
+                input = realloc(input, length * sizeof(char));
+                if (input == NULL) {
+                    fprintf(stderr, "Memory allocation error.\n");
+                    exit(EXIT_FAILURE);
+                }
+                input[length] = ch;
+                length++;
+            }
+            *secret_length = length;
+            fclose(fp);
+        }
+        else {
+            fprintf(stderr, "%s\n", "Couldn't open the file");
+        }
     }
     else {
-        fprintf(stderr, "%s\n", "Couldn't open the file");
+        printf("Insert the secret (M) you want to share: ");
+        input = read_input();
+        *secret_length = strlen(input) - 1;
     }
-    return secret;
+
+    *secret = (int*)realloc(*secret, sizeof(int) * strlen(input));
+    for (int i = 0; input[i] != '\0'; i++) {
+        (*secret)[i] = input[i];
+    }
 }
 
 bool is_prime(int value){
@@ -107,7 +160,7 @@ int choose_modulus(int n, int secret) {
     return p;
 }
 
-Player* populate_players(int n){
+Player* populate_players(int n, int length){
     Player* players = malloc(n * sizeof(Player));
     if(players == NULL) {
         fprintf(stderr, "Memory allocation error.\n");
@@ -116,15 +169,24 @@ Player* populate_players(int n){
 
     for (int i = 0; i < n; i++) {
         sprintf(players[i].name, "Player%d", i + 1);
-        players[i].x = i + 1;
-        players[i].y = 0;
+
+        players[i].x = malloc(length * sizeof(long));
+        players[i].y = malloc(length * sizeof(long));
+        if (players[i].x == NULL || players[i].y == NULL) {
+            fprintf(stderr, "Memory allocation error for Player %d.\n", i + 1);
+            exit(EXIT_FAILURE);
+        }
+        for (int j = 0; j < length; j++) {
+            players[i].x[j] = i + 1;
+            players[i].y[j] = 0;
+        }
     }
     return players;
 }
 
-void print_players(Player* players, int n){
+void print_players(Player* players, int n, int j){
     for (int i = 0; i < n; i++) {
-        printf("%s -> (%d, %d)\n", players[i].name, players[i].x, players[i].y);
+        printf("%s -> (%d, %d)\n", players[i].name, players[i].x[j], players[i].y[j]);
     }
 }
 
@@ -162,12 +224,12 @@ void print_polynomial(Polynomial polynomial){
     printf("%dx^%d\n", polynomial.t[i].coefficient, polynomial.t[i].exponent);
 }
 
-void split_shares(Player* players, Polynomial f, int n, int p) {
+void split_shares(Player* players, Polynomial f, int n, int p, int l) {
     for(int i = 0; i < n; i++) {
         for (int j = 0; j < f.n; j ++){
-            players[i].y += f.t[j].coefficient * ((int) pow(players[i].x, f.t[j].exponent));
+            players[i].y[l] += f.t[j].coefficient * ((int) pow(players[i].x[l], f.t[j].exponent));
         }
-        players[i].y = mod(players[i].y, p);
+        players[i].y[l] = mod(players[i].y[l], p);
     }
 }
 
@@ -185,22 +247,22 @@ Player* slice_array(Player* players, int start, int end){
 }
 
 int mod(int a, int b){
-    int r = a % b;
+    long r = a % b;
     return r < 0 ? r + b : r;
 }
 
-void rebuild_secret(Player* players, int k, int p){
+int rebuild_secret(Player* players, int k, int p, int l){
     double result = 0;
     for (int i = 0; i <= k; i++) {
         double product = 1;
         for (int j = 0; j <= k; j++) {
             if (j == i) continue;
-            product *= (double) (0 - players[j].x) / (players[i].x - players[j].x);
+            product *= (double) (0 - players[j].x[l]) / (players[i].x[l] - players[j].x[l]);
         }
-        result += players[i].y * product;
+        result += players[i].y[l] * product;
     }
     result = mod((int) result, p);
-    printf("Result with %d shares: %0.f\n",  k + 1, result);
+    return result;
 }
 
 
