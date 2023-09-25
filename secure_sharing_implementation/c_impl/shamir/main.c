@@ -25,7 +25,7 @@ int validate_input(char* text, int min_val, int max_val);
 int get_secret_type();
 char* read_input();
 int choose_modulus(int n, int secret);
-int mod(int a, int b);
+int mod(long a, int b);
 int* generate_coefficients(int threshold, int p, int secret);
 void get_secret(int secret_type, int** secret, int* secret_length);
 bool is_prime(int value);
@@ -43,12 +43,17 @@ int main(){
     int* secret = NULL;
     int* p = NULL;
     Player* players = NULL;
+    FILE* result = NULL;
 
     n_player = validate_input("Insert the value of 'n': ", 0, INT_MAX);
     threshold = validate_input("Insert the value of the threshold (k): ", 1, n_player);
     secret_type = get_secret_type();
     get_secret(secret_type, &secret, &secret_length);
     players = populate_players(n_player, secret_length);
+
+    for (int t = 0; t < secret_length; t++){
+        printf("%d ", secret[t]);
+    }
 
     // The secret is split among players
     for (int i = 0; i < secret_length; i++) {
@@ -64,16 +69,20 @@ int main(){
         print_players(players, n_player, i);
     }
 
-    // The secret is getting decrypted, each time with a different number of players
-    for (int i = 0; i < n_player; i++){
-        char* rebuilt_secret = NULL;
-        Player* sliced_array = slice_array(players, 0, i);
-        for (int j = 0; j < secret_length; j++){
-            char s = rebuild_secret(sliced_array, i, p[j], j);
-            rebuilt_secret = (char*)realloc(rebuilt_secret, (i+1)*sizeof(char));
-            strncat(rebuilt_secret, &s, 1);
+    if ((result = fopen("./result.txt", "w+")) != NULL) {
+        // The secret is getting decrypted, each time with a different number of players
+        for (int i = 0; i < n_player; i++) {
+            char *rebuilt_secret = NULL;
+            rebuilt_secret = (char *) malloc(secret_length * sizeof(char));
+            Player *sliced_array = slice_array(players, 0, i);
+            for (int j = 0; j < secret_length; j++) {
+                char s = rebuild_secret(sliced_array, i, p[j], j);
+                strncat(rebuilt_secret, &s, 1);
+            }
+            fprintf(result, "Result with %d players: %s\n", i + 1, rebuilt_secret);
         }
-        printf("Result with %d players: %s\n",  i + 1, rebuilt_secret);
+    } else {
+        fprintf(stderr, "%s\n", "Couldn't open the file");
     }
     return 1;
 }
@@ -117,8 +126,9 @@ void get_secret(int secret_type, int** secret, int* secret_length){
 
         if ((fp = fopen("./secret.txt", "r")) != NULL) {
             char ch;
+
             while ((ch = fgetc(fp)) != EOF) {
-                input = realloc(input, length * sizeof(char));
+                input = (char*)realloc(input, (length + 1) * sizeof(char));
                 if (input == NULL) {
                     fprintf(stderr, "Memory allocation error.\n");
                     exit(EXIT_FAILURE);
@@ -126,12 +136,19 @@ void get_secret(int secret_type, int** secret, int* secret_length){
                 input[length] = ch;
                 length++;
             }
+            input = (char*)realloc(input, (length + 1) * sizeof(char));
+            if (input == NULL) {
+                fprintf(stderr, "Memory allocation error.\n");
+                exit(EXIT_FAILURE);
+            }
+            input[length] = '\0';
             *secret_length = length;
             fclose(fp);
         }
         else {
             fprintf(stderr, "%s\n", "Couldn't open the file");
         }
+
     }
     else {
         printf("Insert the secret (M) you want to share: ");
@@ -246,22 +263,22 @@ Player* slice_array(Player* players, int start, int end){
     return sliced_array;
 }
 
-int mod(int a, int b){
+int mod(long a, int b){
     long r = a % b;
     return r < 0 ? r + b : r;
 }
 
 int rebuild_secret(Player* players, int k, int p, int l){
-    double result = 0;
+    double long result = 0;
     for (int i = 0; i <= k; i++) {
-        double product = 1;
+        double long product = 1;
         for (int j = 0; j <= k; j++) {
             if (j == i) continue;
-            product *= (double) (0 - players[j].x[l]) / (players[i].x[l] - players[j].x[l]);
+            product *= (double long) (0 - players[j].x[l]) / (players[i].x[l] - players[j].x[l]);
         }
         result += players[i].y[l] * product;
     }
-    result = mod((int) result, p);
+    result = mod((long) result, p);
     return result;
 }
 
