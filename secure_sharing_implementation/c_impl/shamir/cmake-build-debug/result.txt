@@ -1,104 +1,15 @@
-Result with 1 players: $!""% """$$$ "!"!!!$# !!!!!"""%" !"# !$"!"" #"$%"!!!"" ! !"!!!"%" ! !" "$""#!!"% ""%""" "#""!" " $!"$"!!" !!"$!"!! %$ "!!!" "$"!"!! !#!#"" !!"%$#"$$"! $$$"!"!"""#!$"!!" !""!#!$! !" "$""%$ "!! %"!#"!$" $!"#"""#" " "$$! " !#"""" "!!  "!!" #!"!! !" "$"""$!"!"!  #"" $$$"!"!"""#""  !"#"" #"$$#"%" " "%" " !$"!!"#!"""#!!"""!"!"!"""$! ""$!!!" %!!""""$!"!"! !$# !!!!!" %"!#$!"$!"#""!$" "" #!#!#!" #" !!%#$#$!" ! !$$" " "!#"#!"$$$" #!!#!!#$#!$""$"$"$!"!! #" !$"$$"! !!%!!"""#" !$
-Result with 2 players: 9:.O@AMGPACM@ODO@AGB=MAB ?ONAA?BABC@=@GPGA?GNEADGB"*CGADCDPCB=BA?CGAAABCBBAMPCA"4AABG>CDCM=NBAGPACMP@GMGAGNB=C?G>CAO@?GDC?BCAABCDB@G?AAPOACA@A?C>GDG=?C@=A-:@=AAANBD=@GCABAMPO@NCDD= CBAODDG?GBC@GNADGBB@GABG?CADAD"4AABG>CDCMPOACA@AA=PGAN=BADGAD=?GNG=BGNG>CA"0CDD==?>G>AN@CM=CECA =BA=EGBBGANA?CA"4AABG>CDCMCDB@G?GAAE@=DG@=AODDG?GBC@GN"/=C@GAAA@D=@GCANCDD="+N@=PG>CA@=PG>CAADGBBGN?G@CNBABBG?GBC@"+BG=MM=DAAC=@= DA?BCAP@ABGCMCDB@G?GAA?ONAA?BABC@ A=PGANO@?GD=?GNG=BADGA ?CGADANAN=BGANG>FAFNOND=?CA":F=AADDCA=CECANCN? MODDGANA?=NBANON ?OMMO@OCDB@G?AAHCABO"0CDD=MAEABP@ABGCMHCABO"
-Result with 3 players: R
-&
-')
- &
-'(
-()
-'(()&
-'
- (+
-)'
-*) )((
-%)'
-'(
-)(
-()'+
-'() )
-(
-')
-&'
-
- ))'
-&
- )()'
-(
-) (&'
-')&
-) 
-)&8
-&'(
-*&)'
-(&
-)  )
-)(
-'  ()
- (
-(&'(%)
-* +
-'() )
-')&
-'
-
-  '
- 
- )'+
-)  
-
-)
-)))
-(
-'(('
-%)+
-'() )
-) (&'
-&*
-'  ()+
-)&'
-'
-*&)'
-)  +
-
-)'
-)'
- (
-()(
-  ()&+
-(
- '))
- ()'
-&()
-) (&'
-'(()&)
-'
-&
- 
-  ')
-%)'
-*('
-
-,
-
- )'+
-'  )'
-))
-))
-  '
-
-(
-)
-
-) (&'
-)'(+
-)  
-(
-&()
-)'(+
-Result with 4 players: #$+)%,) + +%)+* %,%%*# %% ,%),% )*%,),%)%%*%+%  %,+% %$*%),+*  +  %% %* %%% % ),+,%* % %*%%*%  %* )##%%*% ) %%#% +  %% %*% %*  * ,% ,% %%*% *%%%))   ,%) %%+*,%*+% %*% %%**%*%$*+* $$  #**)+  %***+*+))+ + %&+  )#,%)&+
-Result with 5 players: OP Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate quis est ut tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent varius tempor nulla, ut sollicitudin elit tristique vel. Vestibulum posuere sapien a felis lacinia finibus. Nulla ac bibendum augue, at sagittis neque. Vestibulum ultricies gravida sollicitudin. Mauris sed varius nulla. In dapibus dapibus elit tincidunt efficitur. Etiam malesuada, lectus pretium ultricies consectetur, sapien orci lacinia felis, quis venenatis nibh ex non lacus. Phasellus augue nunc, mollis nec ante non, commodo ultrices justo. Nullam eget pretium justo.
-Result with 6 players: OP Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate quis est ut tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent varius tempor nulla, ut sollicitudin elit tristique vel. Vestibulum posuere sapien a felis lacinia finibus. Nulla ac bibendum augue, at sagittis neque. Vestibulum ultricies gravida sollicitudin. Mauris sed varius nulla. In dapibus dapibus elit tincidunt efficitur. Etiam malesuada, lectus pretium ultricies consectetur, sapien orci lacinia felis, quis venenatis nibh ex non lacus. Phasellus augue nunc, mollis nec ante non, commodo ultrices justo. Nullam eget pretium justo.
-Result with 7 players: OP Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate quis est ut tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent varius tempor nulla, ut sollicitudin elit tristique vel. Vestibulum posuere sapien a felis lacinia finibus. Nulla ac bibendum augue, at sagittis neque. Vestibulum ultricies gravida sollicitudin. Mauris sed varius nulla. In dapibus dapibus elit tincidunt efficitur. Etiam malesuada, lectus pretium ultricies consectetur, sapien orci lacinia felis, quis venenatis nibh ex non lacus. Phasellus augue nunc, mollis nec ante non, commodo ultrices justo. Nullam eget pretium justo.
-Result with 8 players: OP Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate quis est ut tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent varius tempor nulla, ut sollicitudin elit tristique vel. Vestibulum posuere sapien a felis lacinia finibus. Nulla ac bibendum augue, at sagittis neque. Vestibulum ultricies gravida sollicitudin. Mauris sed varius nulla. In dapibus dapibus elit tincidunt efficitur. Etiam malesuada, lectus pretium ultricies consectetur, sapien orci lacinia felis, quis venenatis nibh ex non lacus. Phasellus augue nunc, mollis nec ante non, commodo ultrices justo. Nullam eget pretium justo.
-Result with 9 players: OP Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate quis est ut tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent varius tempor nulla, ut sollicitudin elit tristique vel. Vestibulum posuere sapien a felis lacinia finibus. Nulla ac bibendum augue, at sagittis neque. Vestibulum ultricies gravida sollicitudin. Mauris sed varius nulla. In dapibus dapibus elit tincidunt efficitur. Etiam malesuada, lectus pretium ultricies consectetur, sapien orci lacinia felis, quis venenatis nibh ex non lacus. Phasellus augue nunc, mollis nec ante non, commodo ultrices justo. Nullam eget pretium justo.
-Result with 10 players: OP Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate quis est ut tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent varius tempor nulla, ut sollicitudin elit tristique vel. Vestibulum posuere sapien a felis lacinia finibus. Nulla ac bibendum augue, at sagittis neque. Vestibulum ultricies gravida sollicitudin. Mauris sed varius nulla. In dapibus dapibus elit tincidunt efficitur. Etiam malesuada, lectus pretium ultricies consectetur, sapien orci lacinia felis, quis venenatis nibh ex non lacus. Phasellus augue nunc, mollis nec ante non, commodo ultrices justo. Nullam eget pretium justo.
+Result with 1 players: 
+
+
+
+
+
+
+
+
+
+
+
+Result with 2 players: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate quis est ut tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent varius tempor nulla, ut sollicitudin elit tristique vel. Vestibulum posuere sapien a felis lacinia finibus. Nulla ac bibendum augue, at sagittis neque. Vestibulum ultricies gravida sollicitudin. Mauris sed varius nulla. In dapibus dapibus elit tincidunt efficitur. Etiam malesuada, lectus pretium ultricies consectetur, sapien orci lacinia felis, quis venenatis nibh ex non lacus. Phasellus augue nunc, mollis nec ante non, commodo ultrices justo. Nullam eget pretium justo.
+Result with 3 players: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate quis est ut tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent varius tempor nulla, ut sollicitudin elit tristique vel. Vestibulum posuere sapien a felis lacinia finibus. Nulla ac bibendum augue, at sagittis neque. Vestibulum ultricies gravida sollicitudin. Mauris sed varius nulla. In dapibus dapibus elit tincidunt efficitur. Etiam malesuada, lectus pretium ultricies consectetur, sapien orci lacinia felis, quis venenatis nibh ex non lacus. Phasellus augue nunc, mollis nec ante non, commodo ultrices justo. Nullam eget pretium justo.
+Result with 4 players: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate quis est ut tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent varius tempor nulla, ut sollicitudin elit tristique vel. Vestibulum posuere sapien a felis lacinia finibus. Nulla ac bibendum augue, at sagittis neque. Vestibulum ultricies gravida sollicitudin. Mauris sed varius nulla. In dapibus dapibus elit tincidunt efficitur. Etiam malesuada, lectus pretium ultricies consectetur, sapien orci lacinia felis, quis venenatis nibh ex non lacus. Phasellus augue nunc, mollis nec ante non, commodo ultrices justo. Nullam eget pretium justo.

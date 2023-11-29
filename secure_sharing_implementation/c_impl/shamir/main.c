@@ -25,7 +25,7 @@ int validate_input(char* text, int min_val, int max_val);
 int get_secret_type();
 char* read_input();
 int choose_modulus(int n, int secret);
-int mod(long a, int b);
+double long mod(double long a, int b);
 int* generate_coefficients(int threshold, int p, int secret);
 void get_secret(int secret_type, int** secret, int* secret_length);
 bool is_prime(int value);
@@ -50,10 +50,6 @@ int main(){
     secret_type = get_secret_type();
     get_secret(secret_type, &secret, &secret_length);
     players = populate_players(n_player, secret_length);
-
-    for (int t = 0; t < secret_length; t++){
-        printf("%d ", secret[t]);
-    }
 
     // The secret is split among players
     for (int i = 0; i < secret_length; i++) {
@@ -263,8 +259,8 @@ Player* slice_array(Player* players, int start, int end){
     return sliced_array;
 }
 
-int mod(long a, int b){
-    long r = a % b;
+double long mod(double long a, int b){
+    double long r = fmodl(a, b);
     return r < 0 ? r + b : r;
 }
 
@@ -278,8 +274,8 @@ int rebuild_secret(Player* players, int k, int p, int l){
         }
         result += players[i].y[l] * product;
     }
-    result = mod((long) result, p);
-    return result;
+    result = mod(result, p);
+    return (int) result;
 }
 
 
