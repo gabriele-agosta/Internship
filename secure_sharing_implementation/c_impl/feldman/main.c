@@ -39,6 +39,7 @@ int rebuild_secret(Player* players, int k, int q, int l);
 Player* slice_array(Player* players, int start, int end);
 Player* populate_players(int n, int length);
 Polynomial initialize_polynomial(int* coefficients, int threshold);
+long long mod_pow(long long base, long long exponent, long long modulus);
 
 
 int main(){
@@ -87,36 +88,45 @@ int main(){
     }
 
     // Commitments' memory is being allocated
-    commitments = (long long**)malloc(threshold * sizeof(long long*));
-    for (int j = 0; j < threshold; j++) {
+    commitments = (long long**)malloc(n_player * sizeof(long long*));
+    for (int j = 0; j < n_player; j++) {
         commitments[j] = (long long*)malloc(secret_length * sizeof(long long));
     }
 
     // Dealer's commitments are being created
-    for (int j = 0; j < threshold; j++) {
-        for (int k = 0; k < threshold; k++) {
-            long long temp = powl(generator[j], players[k].y[j]);
-            commitments[j][k] = fmod(temp, p[j]);
+    for (int j = 0; j < secret_length; j++) {
+        for (int k = 0; k < n_player; k++) {
+            commitments[j][k] = mod_pow(generator[j], players[k].y[j], p[j]);
         }
     }
 
     // Here players' commitments are created and then compared with the dealers'
-    for (int i = 0; i < threshold; i++){
-        long long value = 1;
-        for (int j = 0; j < threshold; j++) {
-            long long temp = pow(pow(generator[i], coefficients[i][j]), pow(i, j));
-            value *= temp;
-        }
-        value = mod(value, p[i]);
-        for (int j = 0; j < secret_length; j++) {
-            printf("Dealer commitment: %lld\n", commitments[i][j]);
-            printf("Value calculated by the player: %lld\n", value);
-            if (value != commitments[i][j]) {
+    for (int k = 0; k < secret_length; k++) {
+        for (int i = 0; i < n_player; i++) {
+            unsigned long long value = 1;
+            int exp = 1;
+            long long temp = 1;
+            for (int j = 0; j < threshold; j++) {
+                if (j == 0) {
+                    temp = mod_pow(generator[k], coefficients[k][j], p[k]);
+                } else {
+                    exp = pow(players[i].x[k], j);
+                    temp = mod_pow(generator[k], pow(coefficients[k][j], exp), p[k]);
+                }
+                printf("\nExponent: %d", exp);
+                value *= temp;
+            }
+            value = mod_pow(value, players[i].x[k], p[k]);
+
+            printf("\nDealer commitment: %lld\n", commitments[k][i]);
+            printf("Value calculated by player %d: %lld\n", i + 1, value);
+            if (value != commitments[k][i]) {
                 printf("There was an error with commitments\n");
-                break;
+                printf("Values used: %d, %d", temp, exp);
             }
         }
     }
+
 
 
     if ((result = fopen("./result.txt", "w+")) != NULL) {
@@ -134,7 +144,20 @@ int main(){
     } else {
         fprintf(stderr, "%s\n", "Couldn't open the file");
     }
-    return 1;
+    return 0;
+}
+
+long long mod_pow(long long base, long long exponent, long long modulus) {
+    long long result = 1;
+    base = base % modulus;
+    while (exponent > 0) {
+        if (exponent % 2 == 1) {
+            result = (result * base) % modulus;
+        }
+        exponent = exponent >> 1;
+        base = (base * base) % modulus;
+    }
+    return result;
 }
 
 int validate_input(char* text, int min_val, int max_val){
@@ -255,17 +278,15 @@ int choose_generator(int p, int q, int r){
     int *Z_p = malloc(p * sizeof(int));
     int count_z_p = 0;
 
-    // Campo finito Z_p
     for (int i = 0; i < p; i++) {
         if (gcd(i, p) == 1) {
             Z_p[count_z_p++] = i;
         }
     }
 
-    // L'insieme di tutti i generatori G = {h^r mod p | h in Z_p*}
     int *G = malloc(p * sizeof(int));
     for (int i = 0; i < count_z_p; i++){
-        G[i] = mod(pow(Z_p[i], r), p);
+        G[i] = mod_pow(Z_p[i], r, p);
     }
 
     for (int i = 0; i < count_z_p; i ++) {
@@ -280,18 +301,9 @@ int choose_generator(int p, int q, int r){
         }
     }
 
-    printf("\n%G=\n");
-    for (int i = 0; i < count_z_p; i++){
-        printf("%d ", G[i]);
-    }
+    srand(time(NULL));
+    int g = rand() % count_z_p;
 
-    int g = p;
-    for (int i = 0; i < count_z_p; i++) {
-        if (G[i] < g && G[i] != 1) {
-            g = G[i];
-            break;
-        }
-    }
     return g;
 }
 
@@ -326,10 +338,15 @@ void print_players(Player* players, int n, int j){
 }
 
 int* generate_coefficients(int threshold, int q, int secret){
-    int* coefficients = malloc(threshold * sizeof(int));
+    int* coefficients = (int*)malloc(threshold * sizeof(int));
     int i;
     time_t t;
     srand((unsigned) time(&t));
+
+    if (coefficients == NULL) {
+        perror("Memory allocation error");
+        exit(EXIT_FAILURE);
+    }
 
     for(i = threshold - 1; i > 0 ; i-- ) {
         coefficients[i] = 1 + rand() / (RAND_MAX / (q - 1) + 1);

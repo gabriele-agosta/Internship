@@ -1,4 +1,4 @@
-Result with 1 players: A_`V]Y`ac]V_\_`aYbS]Vb%U_^aVUbVbc`SVY`YaUY^WV\Yb'Cc^UdV\V^Y]dYbSVS^bVbY^UYVc^bb`YabY_cV'Fca`V^VYaaVSUb`YabY_cV\YTV`_'IVabYTc\c]Sc\b`YUYVaV^Y]%Sb]SfY]ca\YWc\S'IVabYTc\c]bY^UYVc^b^VUb_`b_`aYbS]VbU_^aVUbVbc`'FVVVcYa]_VVWVb`YacaSbY]`V`VYVb'9_^VUZcab_^c\\S%b`YabY_cVcb`cb`c]S%S\Y_cVb^VU\V_'BSVUV^Sa`_`bSV^Y]dV\aV]`V`XV^V`V`Yb'
-Result with 2 players: !2-.003.00-212-.0/*0./,21..,/./0-*-030.,01..10/#01,1.1.10010/*.*1/./01,0-01//-0./0,0.$0.3.1-0...*,/-0./0,0.10+.-2'../0+0100*01/-0,0...100*/0*3000.10.01*'../0+0100/01,0-01/1.,/2-/2-.0/*0./,21..,/./0-$.-.00.02-.../-0.0.*/003.--0./21.,10./21011*/-0./0,0.0/-0/-00**10,0./1.,1.2"*.,.1*.32-/*.1001.1..03.-/.1--.-0/
-Result with 3 players: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vel enim vitae ante tincidunt tristique. Suspendisse ac tristique libero. Vestibulum a ultricies enim, at maximus ligula. Vestibulum tincidunt nec tortor sit amet consectetur. Sed euismod eget risus at imperdiet. Donec justo nulla, tristique ut rutrum a, aliquet nec leo. Maecenas porta enim vel semper hendrerit.
-Result with 4 players: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vel enim vitae ante tincidunt tristique. Suspendisse ac tristique libero. Vestibulum a ultricies enim, at maximus ligula. Vestibulum tincidunt nec tortor sit amet consectetur. Sed euismod eget risus at imperdiet. Donec justo nulla, tristique ut rutrum a, aliquet nec leo. Maecenas porta enim vel semper hendrerit.
+Result with 1 players: GKE
+Result with 2 players: BF@
+Result with 3 players: cia
+Result with 4 players: cia
